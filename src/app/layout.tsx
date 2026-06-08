@@ -1,45 +1,55 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: './fonts/geist-latin.woff2',
   variable: '--font-geist-sans',
-  subsets: ['latin'],
+  display: 'swap',
+  weight: '100 900',
 })
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: './fonts/geist-mono-latin.woff2',
   variable: '--font-geist-mono',
-  subsets: ['latin'],
+  display: 'swap',
+  weight: '100 900',
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://vantaflow.tech'),
-  title: 'Vanta — AI Lead Conversion Systems',
+  metadataBase: new URL(SITE_URL),
+  title: 'AI Competitor Gap Snapshot for B2B SaaS | Vantaflow',
   description:
-    'Vanta helps B2B teams automate lead capture, qualification, follow-up, and appointment routing with AI-powered lead conversion systems.',
+    'Find out whether AI tools are recommending your B2B SaaS product or your competitors. Get an AI visibility audit with competitor gaps, description accuracy, and a 30-day roadmap.',
   keywords: [
-    'AI lead conversion',
-    'lead qualification automation',
-    'B2B lead automation',
-    'AI appointment automation',
-    'lead flow audit',
-    'AI automation agency',
-    'B2B sales automation',
-    'WhatsApp lead automation',
+    'AI search visibility',
+    'GEO audit',
+    'generative engine optimization',
+    'AI competitor gap analysis',
+    'B2B SaaS AI visibility',
+    'AI recommendation audit',
+    'competitor gap snapshot',
+    'AI search optimization',
+    'B2B SaaS positioning',
+    'AI description accuracy',
   ],
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
-    title: 'Vanta — AI Lead Conversion Systems',
+    title: 'AI Competitor Gap Snapshot for B2B SaaS | Vantaflow',
     description:
-      'Automate your journey from first contact to qualified appointment with AI-powered lead conversion systems.',
+      'Find out whether AI tools are recommending your B2B SaaS product or your competitors. Get an AI visibility audit with competitor gaps, description accuracy, and a 30-day roadmap.',
     type: 'website',
-    url: 'https://your-domain.com',
-    siteName: 'Vanta',
+    url: SITE_URL,
+    siteName: 'Vantaflow',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vanta — AI Lead Conversion Systems',
+    title: 'AI Competitor Gap Snapshot for B2B SaaS | Vantaflow',
     description:
-      'AI-powered systems for faster response, cleaner qualification, and repeatable B2B pipeline growth.',
+      'Find out whether AI tools are recommending your B2B SaaS product or your competitors. Get an AI visibility audit with competitor gaps, description accuracy, and a 30-day roadmap.',
   },
 }
 

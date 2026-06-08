@@ -12,6 +12,7 @@ const config: Config = {
         vanta: {
           bg: '#FAFAFA',
           surface: '#FFFFFF',
+          surfaceAlt: '#F5F5F5',
           text: '#171717',
           muted: '#737373',
           border: '#E5E5E5',
@@ -25,6 +26,11 @@ const config: Config = {
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
+        ],
+        mono: [
+          'var(--font-geist-mono)',
+          'ui-monospace',
+          'monospace',
         ],
       },
     },
