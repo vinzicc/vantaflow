@@ -16,8 +16,9 @@ import {
   Route,
   Search,
 } from 'lucide-react'
+import { JsonLd } from '@/components/JsonLd'
 import { VantaflowFooter } from '@/components/VantaflowFooter'
-import { TALLY_FORM_URL } from '@/lib/site'
+import { FREE_SCORE_FORM_URL, SITE_URL } from '@/lib/site'
 
 /* ─── Animation ─── */
 const ease = [0.22, 1, 0.36, 1] as const
@@ -95,63 +96,116 @@ const examplePrompts = [
   'what tool should I use to automate lead follow-up?',
 ]
 
-const deliverableCards = [
-  {
-    icon: Search,
-    code: '01',
-    type: 'Buyer-intent inventory',
-    title: 'Prompt Map',
-    description:
-      'Buyer-intent prompts grouped by category, use-case, alternative, and comparison intent.',
-  },
-  {
-    icon: GitCompareArrows,
-    code: '02',
-    type: 'Visibility benchmark',
-    title: 'Competitor Mention Gap',
-    description:
-      'Which competitors appear more often and where your product is missing.',
-  },
-  {
-    icon: FileText,
-    code: '03',
-    type: 'Positioning review',
-    title: 'Description Accuracy Notes',
-    description:
-      'Whether AI tools explain your product correctly or misclassify it.',
-  },
-  {
-    icon: Route,
-    code: '04',
-    type: 'Prioritized action plan',
-    title: '30-Day Roadmap',
-    description:
-      'The content and positioning fixes to prioritize first.',
-  },
-]
+const freeScoreBullets = [
+  'Whether your product appears in AI recommendations',
+  'How AI tools describe your category and competitors',
+  'One clear visibility gap you can fix first',
+  'A recommendation on whether a full GEO snapshot is worth doing',
+] as const
+
+const freeScoreFields = [
+  'Work email',
+  'SaaS website URL',
+  'Main competitor URL',
+  'SaaS category (optional)',
+] as const
 
 const processSteps = [
   {
     step: '01',
-    title: 'Submit your product and competitors',
-    description: 'Tell us your product, target category, and 2–5 competitors you want to benchmark against.',
+    title: 'Buyer prompt mapping',
+    description:
+      'We build a prompt set around your category, alternatives, use cases, pain points, and competitor comparisons.',
   },
   {
     step: '02',
-    title: 'We test AI buyer prompts',
-    description: 'We run 20–30 high-intent buyer prompts across ChatGPT, Gemini, Perplexity, and Claude.',
+    title: 'Multi-model visibility testing',
+    description:
+      'We test how major AI tools describe, compare, and recommend your product against competitors.',
   },
   {
     step: '03',
-    title: 'We compare your visibility',
-    description: "We measure how often your product appears vs. competitors and how accurately it's described.",
+    title: 'Competitor gap analysis',
+    description:
+      'We identify where competitors appear more often, get described more clearly, or own stronger category associations.',
   },
   {
     step: '04',
-    title: 'You receive a prioritized report',
-    description: 'A clear snapshot with gaps, scores, and a 30-day roadmap of what to fix first.',
+    title: '30-day action roadmap',
+    description:
+      'You get a prioritized list of content, positioning, and website fixes designed to improve how AI systems understand your product.',
   },
-]
+] as const
+
+const faqItems = [
+  {
+    question: 'How much does the full audit cost?',
+    answer:
+      'The free AI Visibility Score is free. The Founder Beta Snapshot starts at $199 for the first 3 companies while I build early case studies.',
+  },
+  {
+    question: 'How long does it take?',
+    answer:
+      'The free score is delivered within 48 hours. The full beta snapshot is delivered within 5 business days.',
+  },
+  {
+    question: 'Which AI tools do you test?',
+    answer:
+      'The audit focuses on major AI search and assistant tools such as ChatGPT, Claude, Gemini, and Perplexity.',
+  },
+  {
+    question: 'Is this SEO?',
+    answer:
+      'Not exactly. Traditional SEO focuses on ranking in Google. This audit focuses on how AI systems describe, compare, and recommend your SaaS when buyers ask for options, alternatives, and vendor shortlists.',
+  },
+  {
+    question: 'Do I need to install anything?',
+    answer:
+      'No. This is a done-for-you external audit. You only provide your website and competitor URLs.',
+  },
+  {
+    question: 'Do I need to book a call?',
+    answer:
+      'No. The free score can be delivered async by email. If you want to discuss the full snapshot, we can do that after you see the initial result.',
+  },
+] as const
+
+const homepageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${SITE_URL}/#service`,
+      name: 'AI Search Visibility Audit for B2B SaaS',
+      description:
+        'Vantaflow audits how AI tools describe, compare, and recommend B2B SaaS products, then identifies the visibility gaps to fix first.',
+      provider: {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: 'Vantaflow',
+        url: `${SITE_URL}/`,
+      },
+      serviceType: 'Generative Engine Optimization / AI Visibility Audit',
+      audience: {
+        '@type': 'Audience',
+        audienceType: 'B2B SaaS founders, growth teams, and marketing teams',
+      },
+      areaServed: 'Global',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${SITE_URL}/#faq-schema`,
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+}
 
 const audienceTags = [
   'AI SaaS',
@@ -177,7 +231,7 @@ function CTAButton({
   className = '',
   showArrow = false,
   variant = 'primary',
-  children = 'Request snapshot',
+  children = 'Get My Free AI Visibility Score',
   href,
 }: {
   className?: string
@@ -193,7 +247,7 @@ function CTAButton({
 
   return (
     <a
-      href={href ?? TALLY_FORM_URL}
+      href={href ?? FREE_SCORE_FORM_URL}
       target={href ? undefined : '_blank'}
       rel={href ? undefined : 'noopener noreferrer'}
       className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-6 sm:py-3.5 ${base} ${className}`}
@@ -316,7 +370,7 @@ function SubmittedOverlay({ onClose }: { onClose: () => void }) {
           </div>
 
           <p className="mb-2 text-xs font-medium tracking-wide text-vanta-muted">
-            Snapshot request submitted
+            Free score request submitted
           </p>
 
           <h2 id="submitted-card-title" className="text-2xl font-semibold tracking-tight text-vanta-text sm:text-3xl">
@@ -324,11 +378,11 @@ function SubmittedOverlay({ onClose }: { onClose: () => void }) {
           </h2>
 
           <p className="mt-3 text-sm leading-relaxed text-vanta-muted sm:text-base">
-            Thanks for requesting an AI Competitor Gap Snapshot. We&apos;ll test how AI tools describe and recommend your product, compare your visibility against competitors, and send you a prioritized report.
+            Thanks for requesting your free AI Visibility Score. We&apos;ll test how AI tools describe and recommend your product, compare your visibility against a competitor, and send a short summary within 48 hours.
           </p>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {['Test AI prompts', 'Compare visibility', 'Send snapshot report'].map((item, i) => (
+            {['Test buyer prompts', 'Compare competitors', 'Send visibility summary'].map((item, i) => (
               <div key={item} className="rounded-xl border border-vanta-border bg-vanta-bg p-3">
                 <span className="mb-2 block font-mono text-xs text-vanta-orange">0{i + 1}</span>
                 <p className="text-sm font-medium text-vanta-text">{item}</p>
@@ -338,7 +392,7 @@ function SubmittedOverlay({ onClose }: { onClose: () => void }) {
 
           <div className="mt-6 rounded-xl border border-vanta-border bg-vanta-bg p-4">
             <p className="text-sm leading-relaxed text-vanta-muted">
-              No sales call required. We&apos;ll keep the process async and send practical findings based on what you submitted.
+              No credit card and no sales call required. We&apos;ll keep the process async and send practical findings based on what you submitted.
             </p>
           </div>
 
@@ -351,11 +405,11 @@ function SubmittedOverlay({ onClose }: { onClose: () => void }) {
               Back to homepage
             </button>
             <a
-              href="#snapshot"
+              href="/sample-audit"
               onClick={onClose}
               className="inline-flex min-h-11 items-center justify-center rounded-lg border border-vanta-border bg-vanta-surface px-5 py-3 text-sm font-semibold text-vanta-text transition-colors hover:bg-vanta-bg"
             >
-              See sample
+              View Sample Audit
             </a>
           </div>
         </div>
@@ -389,6 +443,7 @@ function SubmittedOverlayController() {
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-vanta-bg text-vanta-text">
+      <JsonLd data={homepageSchema} />
       <Suspense fallback={null}>
         <SubmittedOverlayController />
       </Suspense>
@@ -408,9 +463,9 @@ export default function Home() {
           <div className="hidden items-center gap-7 md:flex">
             {[
               ['What we audit', '#what-we-audit'],
-              ['Snapshot', '#snapshot'],
+              ['Free score', '#free-score'],
               ['How it works', '#how-it-works'],
-              ['Contact', '#contact'],
+              ['FAQ', '#faq'],
             ].map(([label, id]) => (
               <a key={id} href={id} className="text-[13px] font-medium text-vanta-muted transition-colors hover:text-vanta-text">
                 {label}
@@ -419,7 +474,7 @@ export default function Home() {
           </div>
 
           <CTAButton className="shrink-0 justify-self-end !min-h-9 !rounded-lg !px-3.5 !py-2 !text-xs sm:!px-4 sm:!text-[13px]">
-            Request snapshot
+            Get My Free Score
           </CTAButton>
         </div>
       </nav>
@@ -438,7 +493,7 @@ export default function Home() {
                 <motion.div variants={fadeUp}>
                   <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-vanta-border bg-vanta-surface px-3 py-1 text-xs font-medium text-vanta-muted">
                     <span className="h-1.5 w-1.5 rounded-full bg-vanta-orange" />
-                    AI Search / GEO for B2B SaaS
+                    GEO &amp; AI Search Visibility Audits for B2B SaaS
                   </div>
                 </motion.div>
 
@@ -446,17 +501,20 @@ export default function Home() {
                   variants={fadeUp}
                   className="mb-5 text-4xl font-semibold leading-[1.06] tracking-[-0.04em] sm:text-5xl lg:text-[3.75rem]"
                 >
-                  Is AI recommending your competitors?
+                  Stop losing pipeline to AI recommendations.
                 </motion.h1>
 
                 <motion.p variants={fadeUp} className="mb-8 max-w-[36rem] text-base leading-relaxed text-vanta-muted md:text-lg">
-                  We audit how AI tools describe, compare, and recommend your B2B SaaS product — then show what to fix.
+                  ChatGPT, Claude, Gemini, and Perplexity are already shaping your buyers&apos; shortlist. Vantaflow audits how AI tools describe, compare, and recommend your SaaS — then shows what to fix so more buyers find you instead of your competitors.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                  <CTAButton showArrow>Request snapshot</CTAButton>
-                  <CTAButton variant="secondary" href="#snapshot">See sample</CTAButton>
+                  <CTAButton showArrow>Get My Free AI Visibility Score</CTAButton>
+                  <CTAButton variant="secondary" href="/sample-audit">View Sample Audit</CTAButton>
                 </motion.div>
+                <motion.p variants={fadeUp} className="mt-4 max-w-xl text-xs leading-relaxed text-vanta-muted sm:text-sm">
+                  Takes 60 seconds to request. Delivered within 48 hours. No credit card required. No call required.
+                </motion.p>
               </motion.div>
 
               <HeroReportCard />
@@ -562,7 +620,7 @@ export default function Home() {
             <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }}>
               <SectionLabel>The audit</SectionLabel>
               <h2 className="mb-4 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
-                What the snapshot checks
+                What the audit checks
               </h2>
               <p className="max-w-md text-sm leading-relaxed text-vanta-muted sm:text-base">
                 A focused audit of how AI tools see your product versus your competitors.
@@ -593,51 +651,74 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 5 · SNAPSHOT OFFER ── */}
-        <section id="snapshot" className="relative overflow-hidden border-b border-vanta-border bg-vanta-bg">
+        {/* ── 5 · FREE SCORE ── */}
+        <section id="free-score" className="relative overflow-hidden border-b border-vanta-border bg-vanta-bg">
           <div className="vanta-line-grid pointer-events-none absolute inset-0 opacity-45" />
           <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-amber-100/30 blur-3xl" />
           <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-            <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }} className="grid items-end gap-6 lg:grid-cols-[1fr_auto]">
-              <div className="max-w-2xl">
-                <SectionLabel>What you receive</SectionLabel>
-                <h2 className="mb-4 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
-                  AI Competitor Gap Snapshot
-                </h2>
-                <p className="text-sm leading-relaxed text-vanta-muted sm:text-base">
-                  A practical report showing where your product appears, where competitors win, and which content gaps to fix first.
-                </p>
-              </div>
-              <CTAButton showArrow>Request snapshot</CTAButton>
-            </motion.div>
-
             <motion.div
-              variants={stagger}
+              variants={fadeUp}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: '-40px' }}
-              className="mt-10 grid gap-4 sm:grid-cols-2"
+              className="max-w-3xl"
             >
-              {deliverableCards.map((item) => (
-                <motion.article
-                  key={item.title}
-                  variants={fadeUp}
-                  className="group rounded-2xl border border-vanta-border bg-white p-5 shadow-[0_10px_34px_rgba(23,23,23,0.04)] transition-colors hover:border-orange-200 sm:p-7"
-                >
-                  <div className="mb-8 flex items-center justify-between gap-4">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-orange-200 bg-orange-50 text-vanta-orange">
-                      <item.icon size={16} strokeWidth={1.8} aria-hidden />
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-vanta-muted">
-                      Artifact {item.code}
-                    </span>
-                  </div>
-                  <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-vanta-muted">{item.type}</p>
-                  <h3 className="mb-2 text-lg font-semibold tracking-[-0.02em] text-vanta-text">{item.title}</h3>
-                  <p className="max-w-md text-sm leading-relaxed text-vanta-muted">{item.description}</p>
-                </motion.article>
-              ))}
+              <SectionLabel>Free lead magnet</SectionLabel>
+              <h2 className="mb-4 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
+                Get your free AI Visibility Score
+              </h2>
+              <p className="text-base leading-relaxed text-vanta-muted sm:text-lg">
+                See whether ChatGPT, Claude, Gemini, and Perplexity understand your product — or recommend your competitors instead.
+              </p>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-vanta-muted sm:text-base">
+                Submit your SaaS website and one competitor. I&apos;ll manually test a small set of high-intent buyer prompts and send you a short visibility summary within 48 hours.
+              </p>
             </motion.div>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+              <motion.div
+                variants={stagger}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true, margin: '-40px' }}
+                className="overflow-hidden rounded-2xl border border-vanta-border bg-white"
+              >
+                {freeScoreBullets.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    variants={fadeUp}
+                    className={`flex items-start gap-4 p-5 sm:p-6 ${index > 0 ? 'border-t border-vanta-border' : ''}`}
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-orange-200 bg-orange-50 text-vanta-orange">
+                      <CheckCircle2 size={15} strokeWidth={2} aria-hidden />
+                    </span>
+                    <p className="text-sm font-medium leading-relaxed text-vanta-text sm:text-base">{item}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <motion.aside
+                variants={fadeUp}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true, margin: '-40px' }}
+                className="rounded-2xl border border-orange-200/80 bg-white p-5 shadow-[0_18px_50px_rgba(23,23,23,0.06)] sm:p-7"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-vanta-orange">What you&apos;ll submit</p>
+                <ul className="mt-5 space-y-3">
+                  {freeScoreFields.map((field) => (
+                    <li key={field} className="flex items-center gap-3 text-sm text-vanta-text">
+                      <span className="h-1.5 w-1.5 rounded-full bg-vanta-orange" />
+                      {field}
+                    </li>
+                  ))}
+                </ul>
+                <CTAButton showArrow className="mt-7 w-full">
+                  Get My Free AI Visibility Score
+                </CTAButton>
+                <p className="mt-3 text-center text-xs text-vanta-muted">No credit card. No call required.</p>
+              </motion.aside>
+            </div>
           </div>
         </section>
 
@@ -645,11 +726,14 @@ export default function Home() {
         <section id="how-it-works" className="relative overflow-hidden border-b border-vanta-border bg-white">
           <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-[52rem] max-w-full -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(249,115,22,0.055),transparent_68%)]" />
           <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-            <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }} className="mb-10 max-w-2xl">
-              <SectionLabel>Process</SectionLabel>
-              <h2 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
-                How it works
+            <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }} className="mb-10 max-w-3xl">
+              <SectionLabel>Methodology</SectionLabel>
+              <h2 className="mb-4 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
+                How the audit works
               </h2>
+              <p className="text-sm leading-relaxed text-vanta-muted sm:text-base">
+                We test your SaaS across the AI tools your buyers already use to compare vendors and shortlist products.
+              </p>
             </motion.div>
 
             <motion.div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4" variants={stagger} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }}>
@@ -689,7 +773,69 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 8 · FINAL CTA ── */}
+        {/* ── 8 · FOUNDER NOTE ── */}
+        <section className="relative overflow-hidden border-b border-vanta-border bg-white">
+          <div className="pointer-events-none absolute -right-32 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-orange-100/30 blur-3xl" />
+          <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8 lg:py-28">
+            <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }}>
+              <SectionLabel>Founder note</SectionLabel>
+              <h2 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
+                Built by a solo operator, not a generic AI agency.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: '-40px' }}
+              className="rounded-2xl border border-vanta-border bg-vanta-bg/55 p-5 text-sm leading-relaxed text-vanta-muted sm:p-7 sm:text-base"
+            >
+              <p className="font-semibold text-vanta-text">Hi, I&apos;m Kevin — the builder behind Vantaflow.</p>
+              <p className="mt-4">
+                I started this because B2B buyers are no longer relying only on Google. They ask ChatGPT, Claude, Gemini, and Perplexity to compare tools, shortlist vendors, and explain alternatives.
+              </p>
+              <p className="mt-4">
+                The problem: many good SaaS products are invisible or misrepresented inside those AI answers.
+              </p>
+              <p className="mt-4">
+                Vantaflow gives founders and growth teams a clear view of how AI tools understand their product, where competitors are winning, and what content or positioning gaps to fix first.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── 9 · FAQ ── */}
+        <section id="faq" className="border-b border-vanta-border bg-vanta-surfaceAlt/45">
+          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8 lg:py-28">
+            <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }}>
+              <SectionLabel>FAQ</SectionLabel>
+              <h2 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
+                Questions before you request a score
+              </h2>
+            </motion.div>
+
+            <motion.div variants={stagger} initial="initial" whileInView="animate" viewport={{ once: true, margin: '-40px' }} className="border-y border-vanta-border bg-white">
+              {faqItems.map((item, index) => (
+                <motion.details
+                  key={item.question}
+                  variants={fadeUp}
+                  className={`group px-5 py-5 sm:px-6 ${index > 0 ? 'border-t border-vanta-border' : ''}`}
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-vanta-text sm:text-base">
+                    {item.question}
+                    <span className="text-xl font-normal text-vanta-orange transition-transform group-open:rotate-45" aria-hidden>
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl pr-8 text-sm leading-relaxed text-vanta-muted">{item.answer}</p>
+                </motion.details>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── 10 · FINAL CTA ── */}
         <section id="contact" className="relative overflow-hidden border-b border-vanta-border bg-vanta-bg px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-[radial-gradient(ellipse_at_bottom,rgba(249,115,22,0.09),transparent_66%)]" />
           <motion.div
@@ -704,12 +850,15 @@ export default function Home() {
 
             <div className="relative">
               <h2 className="mb-4 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
-                Find out where AI is sending your buyers.
+                See whether AI tools recommend your SaaS or your competitors.
               </h2>
               <p className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-vanta-muted sm:text-base">
-                Get a competitor gap snapshot and see whether your product is being found, described, and recommended correctly.
+                Get a free AI Visibility Score and one clear gap to fix first.
               </p>
-              <CTAButton showArrow className="mb-4">Request snapshot</CTAButton>
+              <CTAButton showArrow className="mb-4">Get My Free AI Visibility Score</CTAButton>
+              <p className="mx-auto max-w-xl text-xs leading-relaxed text-vanta-muted sm:text-sm">
+                Takes 60 seconds to request. Delivered within 48 hours. No credit card required. No call required.
+              </p>
             </div>
           </motion.div>
         </section>

@@ -1,0 +1,15 @@
+# Vantaflow
+
+Brand: Vantaflow
+Website: https://www.vantaflow.tech
+Founder: Kevin
+Location: Surabaya, Indonesia
+Service: AI Search Visibility / GEO audits for B2B SaaS
+Audience: B2B SaaS founders, growth teams, marketers, and agencies
+
+Important pages:
+- https://www.vantaflow.tech/
+- https://www.vantaflow.tech/sample-audit
+
+Description:
+Vantaflow audits how ChatGPT, Claude, Gemini, and Perplexity describe, compare, and recommend B2B SaaS products, then provides content, positioning, and website fixes to improve AI visibility.

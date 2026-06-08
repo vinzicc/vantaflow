@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { JsonLd } from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
@@ -17,11 +18,48 @@ const geistMono = localFont({
   weight: '100 900',
 })
 
+const organizationAndWebsiteSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Vantaflow',
+      url: `${SITE_URL}/`,
+      description: 'AI search visibility and GEO audits for B2B SaaS companies.',
+      founder: {
+        '@type': 'Person',
+        name: 'Kevin',
+      },
+      areaServed: 'Global',
+      location: {
+        '@type': 'Place',
+        name: 'Surabaya, Indonesia',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Surabaya',
+          addressCountry: 'ID',
+        },
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: 'Vantaflow',
+      url: `${SITE_URL}/`,
+      description: 'AI search visibility and GEO audits for B2B SaaS companies.',
+      publisher: {
+        '@id': `${SITE_URL}/#organization`,
+      },
+    },
+  ],
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'AI Competitor Gap Snapshot for B2B SaaS | Vantaflow',
+  title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
   description:
-    'Find out whether AI tools are recommending your B2B SaaS product or your competitors. Get an AI visibility audit with competitor gaps, description accuracy, and a 30-day roadmap.',
+    'Vantaflow audits how ChatGPT, Claude, Gemini, and Perplexity describe, compare, and recommend your B2B SaaS product — then shows what to fix to improve AI visibility.',
   keywords: [
     'AI search visibility',
     'GEO audit',
@@ -35,21 +73,25 @@ export const metadata: Metadata = {
     'AI description accuracy',
   ],
   alternates: {
-    canonical: SITE_URL,
+    canonical: `${SITE_URL}/`,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   openGraph: {
-    title: 'AI Competitor Gap Snapshot for B2B SaaS | Vantaflow',
+    title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
     description:
-      'Find out whether AI tools are recommending your B2B SaaS product or your competitors. Get an AI visibility audit with competitor gaps, description accuracy, and a 30-day roadmap.',
+      'See whether AI tools recommend your SaaS or your competitors. Get a free AI Visibility Score and discover the gaps to fix first.',
     type: 'website',
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     siteName: 'Vantaflow',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Competitor Gap Snapshot for B2B SaaS | Vantaflow',
+    title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
     description:
-      'Find out whether AI tools are recommending your B2B SaaS product or your competitors. Get an AI visibility audit with competitor gaps, description accuracy, and a 30-day roadmap.',
+      'See whether AI tools recommend your SaaS or your competitors. Get a free AI Visibility Score and discover the gaps to fix first.',
   },
 }
 
@@ -59,10 +101,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
-      >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="font-sans antialiased">
+        <JsonLd data={organizationAndWebsiteSchema} />
         {children}
       </body>
     </html>

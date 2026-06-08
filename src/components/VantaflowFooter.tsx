@@ -1,14 +1,15 @@
 import Link from 'next/link'
-import { TALLY_FORM_URL } from '@/lib/site'
+import { FREE_SCORE_FORM_URL } from '@/lib/site'
 
 const productLinks = [
   { label: 'What we audit', href: '/#what-we-audit' },
-  { label: 'Snapshot', href: '/#snapshot' },
-  { label: 'How it works', href: '/#how-it-works' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Free score', href: '/#free-score' },
+  { label: 'How the audit works', href: '/#how-it-works' },
+  { label: 'FAQ', href: '/#faq' },
 ] as const
 
 const resourceLinks = [
+  { label: 'Sample Audit', href: '/sample-audit' },
   { label: 'Privacy Policy', href: '/privacy' },
   { label: 'Terms of Service', href: '/terms' },
 ] as const
@@ -23,7 +24,7 @@ export function VantaflowFooter() {
               Vantaflow
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-vanta-muted">
-              AI Search Visibility &amp; Competitor Gap Audits for B2B SaaS.
+              AI Search Visibility and GEO Audits for B2B SaaS.
             </p>
             <p className="mt-4 text-xs leading-relaxed text-neutral-500">
               Built for AI SaaS, sales tools, CRM, support platforms, devtools, and analytics teams.
@@ -57,17 +58,17 @@ export function VantaflowFooter() {
           </div>
 
           <div className="rounded-2xl border border-vanta-border bg-vanta-bg/70 p-5">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-vanta-text">Request a snapshot</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-vanta-text">Free AI Visibility Score</h2>
             <p className="mt-3 text-sm leading-relaxed text-vanta-muted">
-              Ready to see whether AI tools recommend you or your competitors?
+              See whether AI tools understand your SaaS or recommend competitors instead.
             </p>
             <a
-              href={TALLY_FORM_URL}
+              href={FREE_SCORE_FORM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-5 inline-flex min-h-10 items-center justify-center rounded-lg bg-vanta-orange px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-vanta-orangeHover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-vanta-orange"
             >
-              Request snapshot
+              Get My Free AI Visibility Score
             </a>
           </div>
         </div>
