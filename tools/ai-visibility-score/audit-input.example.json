@@ -1,0 +1,9 @@
+{
+  "companyName": "Linear",
+  "workEmail": "[kevin@example.com](mailto:kevin@example.com)",
+  "companyWebsite": "https://linear.app",
+  "competitorName": "Jira",
+  "competitorWebsite": "https://www.atlassian.com/software/jira",
+  "category": "Project management / issue tracking",
+  "specificCheck": "I want to know whether AI tools recommend Linear when people ask for Jira alternatives."
+}

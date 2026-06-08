@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "audit:prompts": "node tools/ai-visibility-score/generate-prompts.ts",
+    "audit:report": "node tools/ai-visibility-score/score-report.ts"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",
