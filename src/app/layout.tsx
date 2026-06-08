@@ -79,6 +79,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: 'ImAKNZ_n7ar45UcebKX96EZs7zcAGyxZP1dr263fs1s',
+  },
   openGraph: {
     title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
     description:
