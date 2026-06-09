@@ -1,15 +1,41 @@
 # Vantaflow
 
-Brand: Vantaflow
-Website: https://www.vantaflow.tech
-Founder: Kevin
-Location: Surabaya, Indonesia
-Service: AI Search Visibility / GEO audits for B2B SaaS
-Audience: B2B SaaS founders, growth teams, marketers, and agencies
+> Vantaflow helps B2B SaaS companies understand how AI tools describe, compare, and recommend their products.
 
-Important pages:
-- https://www.vantaflow.tech/
-- https://www.vantaflow.tech/sample-audit
+Vantaflow provides AI search visibility audits, GEO audits, AEO audits, and competitor gap snapshots for B2B SaaS companies. The service tests how tools like ChatGPT, Claude, Gemini, Perplexity, and Google AI describe a product, compare it against competitors, and recommend it in buyer-intent prompts.
 
-Description:
-Vantaflow audits how ChatGPT, Claude, Gemini, and Perplexity describe, compare, and recommend B2B SaaS products, then provides content, positioning, and website fixes to improve AI visibility.
+## Core Positioning
+
+- Brand: Vantaflow
+- Category: AI Search Visibility Audit for B2B SaaS
+- Services: AI visibility audit, GEO audit, AEO audit, AI recommendation audit, competitor gap snapshot
+- Audience: B2B SaaS founders, marketers, growth teams, and product-led companies
+- Main outcome: Find whether AI tools recommend your product, ignore it, describe it inaccurately, or recommend competitors first
+
+## Main Pages
+
+- Homepage: https://www.vantaflow.tech/
+- Sample Audit: https://www.vantaflow.tech/sample-audit
+- Privacy Policy: https://www.vantaflow.tech/privacy
+- Terms of Service: https://www.vantaflow.tech/terms
+
+## What Vantaflow Audits
+
+- Whether AI tools mention the SaaS product for buyer-intent prompts
+- Whether competitors are recommended more often
+- Whether the product is described accurately
+- Whether the product category is clear to AI tools
+- Whether the website has content gaps that reduce AI visibility
+- Which pages, comparisons, FAQs, and positioning assets should be created first
+
+## Example Buyer Prompts Tested
+
+- What are the best tools for B2B SaaS teams?
+- What are the best alternatives to [competitor]?
+- Compare [company] vs [competitor].
+- Which SaaS product should I use for [specific use case]?
+- What tools should a startup use for [category]?
+
+## Contact
+
+For AI visibility audits, visit https://www.vantaflow.tech/

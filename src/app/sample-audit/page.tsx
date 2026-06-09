@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { VantaflowFooter } from '@/components/VantaflowFooter'
 import { FREE_SCORE_FORM_URL, SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
@@ -120,6 +119,27 @@ export default function SampleAuditPage() {
               No PDF is available yet. The sample is presented directly on this page so you can review the format without a gated or fake download.
             </div>
           </div>
+
+          <div className="relative mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+            <div className="rounded-xl border border-vanta-border bg-vanta-bg/50 p-5">
+              <h2 className="text-lg font-semibold">How to read this sample audit</h2>
+              <p className="mt-2 text-sm text-vanta-muted">Each section shows the prompt map, competitor gaps, model notes, description accuracy, and a prioritized 30-day roadmap. Use the visibility score as a quick triage to prioritize fixes.</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <div>
+                  <h3 className="text-sm font-semibold">Visibility score</h3>
+                  <p className="mt-1 text-sm text-vanta-muted">A 0–100 snapshot of how often models recommend the product for buyer prompts; higher is better.</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold">Competitor mentions</h3>
+                  <p className="mt-1 text-sm text-vanta-muted">Lists competitors that appear more often and notes the likely reasons (clearer category, comparison pages, FAQs).</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold">Recommended fixes</h3>
+                  <p className="mt-1 text-sm text-vanta-muted">Actionable website and content changes (comparison pages, clarified category, improved proof) prioritized by impact.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -172,7 +192,6 @@ export default function SampleAuditPage() {
         </section>
       </main>
 
-      <VantaflowFooter />
     </div>
   )
 }

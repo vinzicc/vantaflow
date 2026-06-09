@@ -17,7 +17,6 @@ import {
   Search,
 } from 'lucide-react'
 import { JsonLd } from '@/components/JsonLd'
-import { VantaflowFooter } from '@/components/VantaflowFooter'
 import { FREE_SCORE_FORM_URL, SITE_URL } from '@/lib/site'
 
 /* ─── Animation ─── */
@@ -651,7 +650,42 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 5 · FREE SCORE ── */}
+        {<section id="audit-details" className="relative border-b border-vanta-border bg-white">
+  <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20 lg:px-8">
+    <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true }}>
+      <SectionLabel>Audit details</SectionLabel>
+      <h2 className="mb-4 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">What Vantaflow checks</h2>
+      <p className="max-w-md text-sm leading-relaxed text-vanta-muted sm:text-base">
+        The audit tests how AI tools interpret your product category, whether they shortlist you for buyer prompts, and how they compare you to competitors. Results focus on practical fixes that improve visibility in AI-driven buyer journeys.
+      </p>
+    </motion.div>
+
+    <div className="mt-8 grid gap-6 sm:grid-cols-3">
+      <article className="rounded-xl border border-vanta-border bg-vanta-bg p-5">
+        <h3 className="mb-2 text-base font-semibold">AI Visibility</h3>
+        <p className="text-sm leading-relaxed text-vanta-muted">
+          Measures whether major models mention your product for high-intent queries and how often you appear in shortlists compared to competitors.
+        </p>
+      </article>
+
+      <article className="rounded-xl border border-vanta-border bg-vanta-bg p-5">
+        <h3 className="mb-2 text-base font-semibold">Competitor Gap</h3>
+        <p className="text-sm leading-relaxed text-vanta-muted">
+          Identifies prompts where competitors are favored, and the content or signals that make them easier to recommend.
+        </p>
+      </article>
+
+      <article className="rounded-xl border border-vanta-border bg-vanta-bg p-5">
+        <h3 className="mb-2 text-base font-semibold">Description Accuracy</h3>
+        <p className="text-sm leading-relaxed text-vanta-muted">
+          Checks whether AI tools describe your core use cases and differentiators accurately or misclassify your product category.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+/* ── 5 · FREE SCORE ── */}
         <section id="free-score" className="relative overflow-hidden border-b border-vanta-border bg-vanta-bg">
           <div className="vanta-line-grid pointer-events-none absolute inset-0 opacity-45" />
           <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-amber-100/30 blur-3xl" />
@@ -864,7 +898,6 @@ export default function Home() {
         </section>
       </main>
 
-      <VantaflowFooter />
     </div>
   )
 }
