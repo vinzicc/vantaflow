@@ -57,13 +57,21 @@ const organizationAndWebsiteSchema = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
+
+  title: {
+    default: 'Vantaflow — AI Search Visibility Audit for B2B SaaS',
+    template: '%s | Vantaflow',
+  },
+
   description:
-    'Vantaflow audits how ChatGPT, Claude, Gemini, and Perplexity describe, compare, and recommend your B2B SaaS product — then shows what to fix to improve AI visibility.',
+    'Vantaflow audits how ChatGPT, Claude, Gemini, Perplexity, and Google AI describe, compare, and recommend your B2B SaaS product — then shows what to fix to improve AI visibility.',
+
   keywords: [
     'AI search visibility',
     'GEO audit',
+    'AEO audit',
     'generative engine optimization',
+    'answer engine optimization',
     'AI competitor gap analysis',
     'B2B SaaS AI visibility',
     'AI recommendation audit',
@@ -72,29 +80,55 @@ export const metadata: Metadata = {
     'B2B SaaS positioning',
     'AI description accuracy',
   ],
+
+  authors: [{ name: 'Vantaflow' }],
+  creator: 'Vantaflow',
+  publisher: 'Vantaflow',
+
   alternates: {
     canonical: `${SITE_URL}/`,
   },
+
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
+
   verification: {
     google: 'ImAKNZ_n7ar45UcebKX96EZs7zcAGyxZP1dr263fs1s',
   },
+
   openGraph: {
-    title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
+    title: 'Vantaflow — AI Search Visibility Audit for B2B SaaS',
     description:
       'See whether AI tools recommend your SaaS or your competitors. Get a free AI Visibility Score and discover the gaps to fix first.',
     type: 'website',
     url: `${SITE_URL}/`,
     siteName: 'Vantaflow',
+    locale: 'en_US',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Vantaflow AI Search Visibility Audit for B2B SaaS',
+      },
+    ],
   },
+
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Search Visibility Audit for B2B SaaS | Vantaflow',
+    title: 'Vantaflow — AI Search Visibility Audit for B2B SaaS',
     description:
       'See whether AI tools recommend your SaaS or your competitors. Get a free AI Visibility Score and discover the gaps to fix first.',
+    images: ['/og-image.png'],
   },
 }
 

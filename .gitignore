@@ -43,6 +43,7 @@ next-env.d.ts
 # internal AI visibility score working files
 tools/ai-visibility-score/audit-input.json
 tools/ai-visibility-score/observations.json
+tools/ai-visibility-score/bulk-observations.json
 tools/ai-visibility-score/*.local.json
 tools/ai-visibility-score/*.private.json
 tools/ai-visibility-score/*.client.json
