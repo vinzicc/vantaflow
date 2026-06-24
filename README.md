@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vantaflow
 
-## Getting Started
+Landing page for an async **AI search visibility audit** aimed at B2B SaaS founders and growth teams.
 
-First, run the development server:
+**Live site:** https://www.vantaflow.tech
+
+> **Status:** service experiment. This repository contains the marketing site and lead-capture flow. The audit execution process itself is not implemented as an automated product in this codebase.
+
+## Service Positioning
+
+Vantaflow helps teams evaluate how major AI assistants describe, compare, and recommend their product for high-intent buyer prompts.
+
+The site presents an async workflow covering:
+
+1. Buyer-prompt mapping
+2. Multi-model visibility testing
+3. Competitor-gap analysis
+4. A prioritized 30-day action roadmap
+
+## Website Features
+
+- Responsive landing page for a productized audit service
+- Free AI Visibility Score lead magnet
+- External Tally form integration
+- FAQ and service structured data with JSON-LD
+- Search-friendly metadata and canonical site configuration
+- Framer Motion transitions
+- Reusable footer and supporting service pages
+- Async-first positioning with no required sales call
+
+## Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Lucide React
+
+## Local Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Useful checks:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm typecheck
+pnpm lint
+pnpm build
+```
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+The public site URL and lead form URL are defined in `src/lib/site.ts`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```ts
+export const SITE_URL = 'https://www.vantaflow.tech'
+export const FREE_SCORE_FORM_URL = 'https://tally.so/r/xXvlPE'
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Update those values when changing the domain or form destination.
 
-## Deploy on Vercel
+## Repository Scope
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Included:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Marketing website
+- Lead-capture and CTA flow
+- Service copy and pricing presentation
+- SEO metadata and JSON-LD
+- Responsive UI and animations
+
+Not included:
+
+- Automated multi-model audit engine
+- Prompt execution or result collection
+- Client authentication
+- Billing
+- Report generation backend
+- Analytics implementation
